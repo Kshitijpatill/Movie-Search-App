@@ -10,6 +10,7 @@ function App() {
     const savedFavorites = localStorage.getItem("favorites");
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
+
   const addToFavorites = (movieToAdd) => {
     if (!favorites.some((movie) => movie.imdbID === movieToAdd.imdbID)) {
       const newFavorites = [...favorites, movieToAdd];
@@ -19,6 +20,15 @@ function App() {
       alert("This movie is already in your favorites");
     }
   };
+
+  const removeFromFavorites = (movieToRemove) => {
+    const newFavorites = favorites.filter(
+      (movie) => movie.imdbID !== movieToRemove.imdbID
+    );
+    setfavorites(newFavorites);
+    localStorage.setItem("favorites", JSON.stringify(newFavorites));
+  };
+
 
   return (
     <Router>
@@ -37,7 +47,7 @@ function App() {
         />
         <Route
           path="/favorites"
-          element={<Favorites favorites={favorites} />}
+          element={<Favorites favorites={favorites} removeFromFavorites={removeFromFavorites} />}
         />
       </Routes>
     </Router>

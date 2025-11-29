@@ -1,14 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 function Navbar({ setmovie }) {
   const [text, settext] = useState("");
-  
 
   const changeText = (e) => {
     settext(e.target.value);
   };
-
 
   const getMovie = (e) => {
     e.preventDefault();
@@ -28,9 +27,9 @@ function Navbar({ setmovie }) {
         data-bs-theme="dark"
       >
         <div className="container-fluid">
-          <a className="navbar-brand " href="/">
+          <Link className="navbar-brand " to="/">
             Movie Search
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -45,14 +44,14 @@ function Navbar({ setmovie }) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">
+                <NavLink className="nav-link " aria-current="page" to="/">
                   Home
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/Favorites">
+                <NavLink className="nav-link" to="/Favorites">
                   Favorites
-                </a>
+                </NavLink>
               </li>
             </ul>
             <form className="d-flex" role="search" onSubmit={getMovie}>

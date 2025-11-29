@@ -1,6 +1,6 @@
 import React from "react";
 
-function Favorites({ favorites }) {
+function Favorites({ favorites, removeFromFavorites }) {
   return (
     <div className="container my-4">
       <h2 className="text-center mb-4">My Favorite Movies</h2>
@@ -21,8 +21,8 @@ function Favorites({ favorites }) {
                   </div>{" "}
                   <button
                     href="#"
-                    className="btn btn-danger mt-auto my-2 w-auto"
-                    // onClick={() => addToFavorites(value)}
+                    className="btn btn-danger m-auto my-4 w-auto ms-3"
+                    onClick={() => removeFromFavorites(value)}
                   >
                     Remove from &hearts;
                   </button>

@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-function Hero({ movie, setmovie, addToFavorites }) {
+function Hero({ movie, setmovie, addToFavorites, favorites }) {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     axios
-      .get("https://www.omdbapi.com/?s=batman&apikey=12380014")
+      .get("https://www.omdbapi.com/?s=Moon&apikey=12380014")
       .then((res) => {
         setmovie(res.data.Search);
       });
@@ -35,13 +35,21 @@ function Hero({ movie, setmovie, addToFavorites }) {
                 <div className="card-body d-flex flex-column">
                   <h3 className="card-title">{value.Title}</h3>
                   <h6 className="card-text">{value.Year}</h6>
-                  <button
-                    href="#"
-                    className="btn btn-danger mt-auto my-2 w-50"
-                    onClick={() => addToFavorites(value)}
-                  >
-                    Add To &hearts;
-                  </button>
+                  {(() => {
+                    const isFavorite = favorites.some(
+                      (movie) => movie.imdbID === value.imdbID
+                    );
+                    return (
+                      <button
+                        href="#"
+                        className="btn btn-danger mt-auto my-2 w-50"
+                        onClick={() => addToFavorites(value)}
+                        disabled={isFavorite}
+                      >
+                        {isFavorite ? "Added To  \u2665" : "Add To  \u2665"}
+                      </button>
+                    );
+                  })()}
                 </div>
               </div>
             </div>
@@ -72,13 +80,21 @@ function Hero({ movie, setmovie, addToFavorites }) {
                       className="img-fluid rounded"
                       alt={selectedMovie.Title}
                     />
-                    <button
-                      href="#"
-                      className="btn btn-danger w-100 my-2"
-                      onClick={() => addToFavorites(selectedMovie)}
-                    >
-                      Add To &hearts;
-                    </button>
+                    {(() => {
+                      const isFavorite = favorites.some(
+                        (movie) => movie.imdbID === selectedMovie.imdbID
+                      );
+                      return (
+                        <button
+                          href="#"
+                          className="btn btn-danger my-2  w-50"
+                          onClick={() => addToFavorites(selectedMovie)}
+                          disabled={isFavorite}
+                        >
+                          {isFavorite ? "Added To \u2665" : "Add To \u2665"}
+                        </button>
+                      );
+                    })()}
                   </div>
                   <div className="col-md-8">
                     <p>
