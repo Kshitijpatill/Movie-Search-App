@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
+import Hero from "./components/Home";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Favorites from "./components/Favorites";
 
